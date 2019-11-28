@@ -19,7 +19,7 @@ Events such as for onMuteGiven, etc <br />
 Message Users <br />
 And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
 
-# Example Usuage
+# Example Usage
 ```csharp
 VRCSharpSession session = new VRCSharpSession("Username", "Password");
 await session.Login();
