@@ -10,7 +10,6 @@ C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\bin\Debug\VRCSharp.dll
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\bin\Debug\VRCSharp.pdb
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.csprojAssemblyReference.cache
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.csproj.CopyComplete
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.dll
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.pdb

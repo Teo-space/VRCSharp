@@ -119,7 +119,6 @@ namespace VRCSharp.API
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    Console.WriteLine("VoteKicks sent successfully.");
                     return true;
                 }
                 else

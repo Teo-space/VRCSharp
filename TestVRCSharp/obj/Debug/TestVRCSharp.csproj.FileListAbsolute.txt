@@ -9,3 +9,14 @@ C:\Users\Yaekith\source\repos\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.cspro
 C:\Users\Yaekith\source\repos\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.csproj.CopyComplete
 C:\Users\Yaekith\source\repos\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.exe
 C:\Users\Yaekith\source\repos\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.pdb
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\TestVRCSharp.exe.config
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\TestVRCSharp.exe
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\TestVRCSharp.pdb
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\VRCSharp.dll
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\VRCSharp.pdb
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.csprojAssemblyReference.cache
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.csproj.CopyComplete
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.exe
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\TestVRCSharp\obj\Debug\TestVRCSharp.pdb
