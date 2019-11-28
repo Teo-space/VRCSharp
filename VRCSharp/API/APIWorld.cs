@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using VRCSharp.API.Extensions;
+using VRCSharp.API.Moderation;
 using VRCSharp.API.Worlds;
 using VRCSharp.Global;
 
@@ -80,7 +81,6 @@ namespace VRCSharp.API
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
             var response = await client.GetAsync($"https://vrchat.com/api/1/worlds/{WorldID}?apiKey={GlobalVars.ApiKey}");
-
             return JsonConvert.DeserializeObject<APIWorld>(await response.Content.ReadAsStringAsync());
         }
 
@@ -154,6 +154,36 @@ namespace VRCSharp.API
                 {
                     return false;
                 }
+            }
+        }
+
+        public static async Task<bool> Invite(this VRCSharpSession session, APIUser user, APIWorld world, string worldIdWithTags)
+        {
+            HttpClientHandler handler = null;
+            HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
+
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
+
+            var payload = JsonConvert.SerializeObject(new InvitePayload() { message = "", type = "invite", details = new Details(world, worldIdWithTags)});
+
+            var response = await client.PostAsync($"https://vrchat.com/api/1/user/{user.id}/notification?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                
+                return false;
             }
         }
     }

@@ -49,6 +49,25 @@ namespace VRCSharp.API.Extensions
             }
         }
 
+        public static NotificationType Convert(this string type)
+        {
+            switch (type)
+            {
+                default:
+                    return NotificationType.broadcast;
+                case "broadcast":
+                    return NotificationType.broadcast;
+                case "friendRequest":
+                    return NotificationType.friendRequest;
+                case "invite":
+                    return NotificationType.invite;
+                case "message":
+                    return NotificationType.message;
+                case "requestInvite":
+                    return NotificationType.requestInvite;
+            }
+        }
+
         public static IWebProxy GetRandomProxy()
         {
             if (!File.Exists("Proxies.txt"))

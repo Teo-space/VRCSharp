@@ -47,7 +47,7 @@
     <Compile Include="AccountInfo.cs" />
     <Compile Include="API\APIUser.cs" />
     <Compile Include="API\APIWorld.cs" />
-    <Compile Include="API\EventManager.cs" />
+    <Compile Include="API\EventArguments\NotificationEventArgs.cs" />
     <Compile Include="API\Extensions\APIExtensions.cs" />
     <Compile Include="API\FriendRequests\FriendRequest.cs" />
     <Compile Include="API\FriendRequests\FriendRequestCancel.cs" />

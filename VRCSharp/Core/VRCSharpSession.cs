@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using VRCSharp.API;
+using VRCSharp.API.EventArguments;
 using VRCSharp.API.Extensions;
+using VRCSharp.API.Other;
 using VRCSharp.Global;
 
 namespace VRCSharp
@@ -28,11 +31,25 @@ namespace VRCSharp
 
         public AccountInfo Info { get; set; }
 
-        public VRCSharpSession(string username, string password, bool UseProxies = false)
+        #region Events
+        public delegate void NotificationHandler(VRCSharpSession session, NotificationEventArgs args);
+
+        public event NotificationHandler OnNotificationReceived;
+        #endregion
+
+        public VRCSharpSession(string username, string password, bool useProxies = false)
         {
             _username = username;
             _password = password;
-            this.UseProxies = UseProxies;
+            UseProxies = useProxies;
+
+            new Thread(() =>
+            {
+                System.Timers.Timer timer = new System.Timers.Timer(60000);
+                timer.AutoReset = true;
+                timer.Elapsed += Timer_Elapsed;
+                timer.Enabled = true;
+            }).Start();
         }
 
         public async Task Login()
@@ -72,5 +89,37 @@ namespace VRCSharp
             AuthToken = "";
             Authenticated = false;
         }
+
+        #region Event Handler
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (Authenticated)
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", AuthToken);
+
+                var response = client.GetAsync($"https://vrchat.com/api/1/auth/user/notifications?apiKey={GlobalVars.ApiKey}");
+
+                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var resp = JsonConvert.DeserializeObject<List<NotificationResponse>>(response.Result.Content.ReadAsStringAsync().Result);
+
+                    foreach (var res in resp)
+                    {
+                        double result = DateTime.Now.Subtract(res.created_at).TotalSeconds;
+
+                        var amount = Math.Round(result, 0);
+
+                        if (amount < 130)
+                        {
+                            OnNotificationReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                        }
+                    }
+                }
+            }
+           
+        }
+        #endregion
     }
 }

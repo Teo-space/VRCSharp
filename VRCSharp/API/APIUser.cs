@@ -133,15 +133,14 @@ namespace VRCSharp.API
             var payload = JsonConvert.SerializeObject(new NotificationPayload() { message = message, type = type.Convert() });
 
             var response = await client.PostAsync($"https://vrchat.com/api/1/user/{user.id}/notification?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
+            Console.WriteLine(payload.ToString());
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
                 return true;
             }
             else
             {
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
                 return false;
             }
         }
