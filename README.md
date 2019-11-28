@@ -12,10 +12,10 @@ Block Users <br />
 Hide Users <br />
 Send Notifications to Users <br />
 Annoy (Send out an invite a user cant get rid of <br />
+Proxy Support <br />
 
 # ROAD MAP (Planned Features)
 Events such as for onMuteGiven, etc <br />
-Proxy Support <br />
 Message Users <br />
 And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
 
