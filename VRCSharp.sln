@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRCSharp", "VRCSharp\VRCSharp.csproj", "{A9D9A567-F701-4480-B849-278522744DB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVRCSharp", "TestVRCSharp\TestVRCSharp.csproj", "{8CE5D007-6599-4C6F-B5D1-1559877DC55F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9D9A567-F701-4480-B849-278522744DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D9A567-F701-4480-B849-278522744DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D9A567-F701-4480-B849-278522744DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D9A567-F701-4480-B849-278522744DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE5D007-6599-4C6F-B5D1-1559877DC55F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE5D007-6599-4C6F-B5D1-1559877DC55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE5D007-6599-4C6F-B5D1-1559877DC55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE5D007-6599-4C6F-B5D1-1559877DC55F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {130ADEE8-9B85-4993-AE8C-1327DB02347E}
+	EndGlobalSection
+EndGlobal
