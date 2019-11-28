@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using VRCSharp.API.Moderation;
@@ -44,6 +46,21 @@ namespace VRCSharp.API.Extensions
                     return "message";
                 case NotificationType.requestInvite:
                     return "requestInvite";
+            }
+        }
+
+        public static IWebProxy GetRandomProxy()
+        {
+            if (!File.Exists("Proxies.txt"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Couldn't load proxies because we couldn't find Proxies.txt");
+                Console.ForegroundColor = ConsoleColor.White;
+                return null;
+            }
+            else
+            {
+                return new WebProxy(File.ReadAllLines("Proxies.txt")[new Random().Next(1, File.ReadAllLines("Proxies.txt").Count())]);
             }
         }
     }

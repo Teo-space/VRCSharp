@@ -53,6 +53,8 @@
     <Compile Include="API\FriendRequests\FriendStatus.cs" />
     <Compile Include="API\Moderation\ModerationPayload.cs" />
     <Compile Include="API\Moderation\ModerationType.cs" />
+    <Compile Include="API\Moderation\NotificationPayload.cs" />
+    <Compile Include="API\Moderation\NotificationType.cs" />
     <Compile Include="API\Worlds\VoteKickPayload.cs" />
     <Compile Include="Global\GlobalVars.cs" />
     <Compile Include="Core\VRCSharpSession.cs" />

@@ -13,3 +13,4 @@ C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\bin\Debug\Newtonsoft.Json.xm
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.csproj.CopyComplete
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.dll
 C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.pdb
+C:\Users\Yaekith\Documents\GitHub\VRCSharp\VRCSharp\obj\Debug\VRCSharp.csprojAssemblyReference.cache

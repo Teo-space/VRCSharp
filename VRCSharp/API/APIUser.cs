@@ -43,7 +43,16 @@ namespace VRCSharp.API
 
         public static async Task<APIUser> GetAPIUserByID(this VRCSharpSession session, string UserID)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
@@ -54,7 +63,16 @@ namespace VRCSharp.API
 
         public static async Task<FriendStatus> Friend(this VRCSharpSession session, APIUser User)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
             var payload = JsonConvert.SerializeObject(new FriendRequest() { _params= new FriendRequest.Params() { userId=User.id} });
@@ -72,7 +90,16 @@ namespace VRCSharp.API
 
         public static async Task<FriendRequestCancel> Unfriend(this VRCSharpSession session, APIUser User)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
@@ -89,7 +116,16 @@ namespace VRCSharp.API
         }
         public static async Task<bool> Notify(this VRCSharpSession session, APIUser user, NotificationType type, string message)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
@@ -109,7 +145,16 @@ namespace VRCSharp.API
 
         public static async Task<bool> Moderate(this VRCSharpSession session, APIUser user, ModerationType type)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
             var payload = JsonConvert.SerializeObject(new ModerationPayload() { moderated = user.id, type = type.Convert() });

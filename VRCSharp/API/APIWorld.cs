@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using VRCSharp.API.Extensions;
 using VRCSharp.API.Worlds;
 using VRCSharp.Global;
 
@@ -65,7 +66,16 @@ namespace VRCSharp.API
     {
         public static async Task<APIWorld> GetAPIWorldByID(this VRCSharpSession session, string WorldID)
         {
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
@@ -82,7 +92,16 @@ namespace VRCSharp.API
             nvc.Add(new KeyValuePair<string, string>("worldId", $"{World.id}:{InstanceID.ToString()}"));
             var req = new HttpRequestMessage(HttpMethod.Put, "https://vrchat.com/api/1/visits") { Content = new FormUrlEncodedContent(nvc) };
 
+            HttpClientHandler handler = null;
             HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
 
@@ -110,7 +129,17 @@ namespace VRCSharp.API
             }
             else
             {
+                HttpClientHandler handler = null;
                 HttpClient client = new HttpClient();
+
+                if (session.UseProxies)
+                {
+                    //Load proxies from Proxies.txt
+                    handler = new HttpClientHandler();
+                    handler.Proxy = APIExtensions.GetRandomProxy();
+                    client = new HttpClient(handler);
+                }
+
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
                 var payload = JsonConvert.SerializeObject(new VoteKickPayload() { worldId = APIWorldHelper.CurrentWorldID, instanceId = APIWorldHelper.CurrentInstanceID.ToString()});
