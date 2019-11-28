@@ -186,5 +186,35 @@ namespace VRCSharp.API
                 return false;
             }
         }
+        public static async Task<bool> Message(this VRCSharpSession session, APIUser user, string Message, string worldIdWithTags)
+        {
+            HttpClientHandler handler = null;
+            HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
+
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
+
+            var payload = JsonConvert.SerializeObject(new InvitePayload() { message = "", type = "invite", details = new Details($"{session.Info.displayName} said: {Message}", worldIdWithTags) });
+
+            var response = await client.PostAsync($"https://vrchat.com/api/1/user/{user.id}/notification?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
+            Console.WriteLine(payload.ToString());
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

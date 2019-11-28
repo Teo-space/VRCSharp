@@ -32,5 +32,11 @@ namespace VRCSharp.API.Moderation
             worldId = worldIDWithTags;
             worldName = world.name.ToString();
         }
+
+        public Details(string worldName, string worldIDWithTags)
+        {
+            worldId = worldIDWithTags;
+            this.worldName = worldName;
+        }
     }
 }
