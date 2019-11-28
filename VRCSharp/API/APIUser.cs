@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using VRCSharp.API.Extensions;
+using VRCSharp.API.Moderation;
 using VRCSharp.API.Worlds;
 using VRCSharp.Global;
 
@@ -57,7 +60,7 @@ namespace VRCSharp.API
             var payload = JsonConvert.SerializeObject(new FriendRequest() { _params= new FriendRequest.Params() { userId=User.id} });
             var response = await client.PostAsync($"https://vrchat.com/api/1/user/{User.id}/friendRequest?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 return JsonConvert.DeserializeObject<FriendStatus>(await response.Content.ReadAsStringAsync());
             }
@@ -75,7 +78,7 @@ namespace VRCSharp.API
 
             var response = await client.DeleteAsync($"https://vrchat.com/api/1/user/{User.id}/friendRequest?apiKey={GlobalVars.ApiKey}");
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 return JsonConvert.DeserializeObject<FriendRequestCancel>(await response.Content.ReadAsStringAsync());
             }
@@ -85,7 +88,23 @@ namespace VRCSharp.API
             }
         }
 
-       
+        public static async Task<bool> Moderate(this VRCSharpSession session, APIUser user, ModerationType type)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
+            var payload = JsonConvert.SerializeObject(new ModerationPayload() { moderated = user.id, type = type.Convert() });
 
+            var response = await client.PostAsync($"https://vrchat.com/api/1/auth/user/playermoderations?apiKey={GlobalVars.ApiKey}&userId={user.id}", new StringContent(payload, Encoding.UTF8, "application/json"));
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

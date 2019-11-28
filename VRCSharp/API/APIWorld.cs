@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,7 +89,7 @@ namespace VRCSharp.API
 
             var response = await client.SendAsync(req);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 APIWorldHelper.CurrentWorldID = World.id;
                 APIWorldHelper.CurrentInstanceID = InstanceID;
@@ -116,7 +117,7 @@ namespace VRCSharp.API
                 Console.WriteLine(payload.ToString());
                 var response = await client.PostAsync($"https://vrchat.com/api/1/user/{User.id}/votekick?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
 
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
                     Console.WriteLine("VoteKicks sent successfully.");
                     return true;

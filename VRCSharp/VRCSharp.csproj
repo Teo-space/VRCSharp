@@ -47,9 +47,12 @@
     <Compile Include="AccountInfo.cs" />
     <Compile Include="API\APIUser.cs" />
     <Compile Include="API\APIWorld.cs" />
+    <Compile Include="API\Extensions\APIExtensions.cs" />
     <Compile Include="API\FriendRequests\FriendRequest.cs" />
     <Compile Include="API\FriendRequests\FriendRequestCancel.cs" />
     <Compile Include="API\FriendRequests\FriendStatus.cs" />
+    <Compile Include="API\Moderation\ModerationPayload.cs" />
+    <Compile Include="API\Moderation\ModerationType.cs" />
     <Compile Include="API\Worlds\VoteKickPayload.cs" />
     <Compile Include="Global\GlobalVars.cs" />
     <Compile Include="Core\VRCSharpSession.cs" />
