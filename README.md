@@ -10,10 +10,12 @@ Fetch Worlds <br />
 Mute Users <br />
 Block Users <br />
 Hide Users <br />
+Send Invites to Users <br />
+Send Notifications to Users <br />
+Annoy (Send out an invite a user cant get rid of < br />
 
 # ROAD MAP (Planned Features)
 Events such as for onMuteGiven, etc <br />
-Send Invites to Users <br />
 Proxy Support <br />
 Message Users <br />
 And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
