@@ -27,5 +27,24 @@ namespace VRCSharp.API.Extensions
                     return "unmute";
             }
         }
+
+        public static string Convert(this NotificationType type)
+        {
+            switch (type)
+            {
+                default:
+                    return null;
+                case NotificationType.broadcast:
+                    return "broadcast";
+                case NotificationType.friendRequest:
+                    return "friendRequest";
+                case NotificationType.invite:
+                    return "invite";
+                case NotificationType.message:
+                    return "message";
+                case NotificationType.requestInvite:
+                    return "requestInvite";
+            }
+        }
     }
 }

@@ -87,6 +87,25 @@ namespace VRCSharp.API
                 return null;
             }
         }
+        public static async Task<bool> Notify(this VRCSharpSession session, APIUser user, NotificationType type, string message)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
+
+            var payload = JsonConvert.SerializeObject(new NotificationPayload() { message = message, type = type.Convert() });
+
+            var response = await client.PostAsync($"https://vrchat.com/api/1/user/{user.id}/notification", new StringContent(payload, Encoding.UTF8, "application/json"));
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public static async Task<bool> Moderate(this VRCSharpSession session, APIUser user, ModerationType type)
         {
