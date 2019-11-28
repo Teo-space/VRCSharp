@@ -15,4 +15,5 @@ Block Users <br />
 Hide Users <br />
 Events such as for onMuteGiven, etc <br />
 Send Invites to Users <br />
+Proxy Support <br />
 And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
