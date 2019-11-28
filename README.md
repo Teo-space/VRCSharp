@@ -17,3 +17,20 @@ Send Invites to Users <br />
 Proxy Support <br />
 Message Users <br />
 And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
+
+# Example Usuage
+```csharp
+VRCSharpSession session = new VRCSharpSession("Username", "Password");
+await session.Login();
+
+ if (session.Authenticated)
+{
+    var user = await session.GetAPIUserByID("usr_e28db278-1ccd-4c23-89b9-9933e619000e");
+
+    if (await session.Moderate(user, VRCSharp.API.Moderation.ModerationType.Mute))
+    {
+      Console.WriteLine("Moderated! Yay!");
+    }
+                    
+}
+```
