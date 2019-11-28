@@ -114,7 +114,7 @@ namespace VRCSharp.API
                 client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
                 var payload = JsonConvert.SerializeObject(new VoteKickPayload() { worldId = APIWorldHelper.CurrentWorldID, instanceId = APIWorldHelper.CurrentInstanceID.ToString()});
                 Console.WriteLine(payload.ToString());
-                var response = await client.PostAsync($"https://vrchat.com/api/1/user/{User.id}/votekick?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26", new StringContent(payload, Encoding.UTF8, "application/json"));
+                var response = await client.PostAsync($"https://vrchat.com/api/1/user/{User.id}/votekick?apiKey={GlobalVars.ApiKey}", new StringContent(payload, Encoding.UTF8, "application/json"));
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
