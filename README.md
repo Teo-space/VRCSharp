@@ -7,7 +7,6 @@ Login to accounts via username and password <br />
 VoteKick users <br />
 Fetch Users <br />
 Fetch Worlds <br />
-Fetch Worlds <br />
 
 # ROAD MAP (Planned Features)
 Mute Users <br />
