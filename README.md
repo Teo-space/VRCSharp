@@ -10,9 +10,8 @@ Fetch Worlds <br />
 Mute Users <br />
 Block Users <br />
 Hide Users <br />
-Send Invites to Users <br />
 Send Notifications to Users <br />
-Annoy (Send out an invite a user cant get rid of < br />
+Annoy (Send out an invite a user cant get rid of <br />
 
 # ROAD MAP (Planned Features)
 Events such as for onMuteGiven, etc <br />
