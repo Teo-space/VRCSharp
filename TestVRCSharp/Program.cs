@@ -21,7 +21,7 @@ namespace TestVRCSharp
             {
                 LoadProxies();
                 Console.Title = "VRCSharp Test";
-                VRCSharpSession session = new VRCSharpSession("Username", "BENISAWESOME", false);
+                VRCSharpSession session = new VRCSharpSession("Username", "Password", false);
                 await session.Login();
                 if (session.Authenticated)
                 {
