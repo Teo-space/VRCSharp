@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using VRCSharp;
 using VRCSharp.API;
@@ -21,18 +22,28 @@ namespace TestVRCSharp
             {
                 LoadProxies();
                 Console.Title = "VRCSharp Test";
-                VRCSharpSession session = new VRCSharpSession("Username", "Password", false);
-                await session.Login();
-                if (session.Authenticated)
-                {
-                    var user = await session.GetAPIUserByID("usr_e28db278-1ccd-4c23-89b9-9933e619000e");
-
-                    if (await session.Moderate(user, VRCSharp.API.Moderation.ModerationType.Mute))
+                
+                
+                foreach (var acc in File.ReadAllLines("accounts.txt").ToList())
                     {
-                        Console.WriteLine("Moderated!");
-                    }
-                    
+                     
+                        var username = acc.Split(':')[0];
+                        var password = acc.Split(':')[1];
+
+                        VRCSharpSession session = new VRCSharpSession(username, password, false);
+                        await session.Login();
+
+                        if (session.Authenticated)
+                        {
+                            Console.WriteLine("Logged in on: " + username + " || Friending User...");
+
+                            var user = await session.GetAPIUserByID("usr_2a7a8c03-8185-4c97-ae0b-7e40c3a1b9a5");
+
+                        await session.Notify(user, VRCSharp.API.Moderation.NotificationType.invite, "");
+
+                        }
                 }
+               
             }
             catch(Exception e)
             {
