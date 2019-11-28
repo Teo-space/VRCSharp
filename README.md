@@ -1,2 +1,2 @@
 # VRCSharp
- A C# wrapper for VRChat's API
+A C# asynchronous wrapper for VRChat's API
