@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using VRCSharp.API;
 using VRCSharp.API.EventArguments;
 using VRCSharp.API.Extensions;
+using VRCSharp.API.Moderation;
 using VRCSharp.API.Other;
 using VRCSharp.Global;
 
@@ -35,6 +36,8 @@ namespace VRCSharp
         public delegate void NotificationHandler(VRCSharpSession session, NotificationEventArgs args);
 
         public event NotificationHandler OnNotificationReceived;
+
+        public event NotificationHandler OnFriendshipRequestReceived;
         #endregion
 
         public VRCSharpSession(string username, string password, bool useProxies = false)
@@ -113,7 +116,16 @@ namespace VRCSharp
 
                         if (amount < 130)
                         {
-                            OnNotificationReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                            switch(res.type.Convert())
+                            {
+                                default:
+                                    OnNotificationReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                                    break;
+                                case NotificationType.friendRequest:
+                                    OnFriendshipRequestReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                                    break;
+                                
+                            }
                         }
                     }
                 }
