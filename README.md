@@ -11,7 +11,7 @@ Mute Users <br />
 Block Users <br />
 Hide Users <br />
 Send Notifications to Users <br />
-Annoy (Send out an invite a user cant get rid of <br />
+Annoy (Send out an invite a user cant get rid of) <br />
 Proxy Support <br />
 Invite Users <br />
 Message Users <br />
