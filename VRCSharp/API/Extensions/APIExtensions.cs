@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using VRCSharp.API.Moderation;
+using VRCSharp.Global;
 
 namespace VRCSharp.API.Extensions
 {
@@ -81,6 +84,27 @@ namespace VRCSharp.API.Extensions
             {
                 return new WebProxy(File.ReadAllLines("Proxies.txt")[new Random().Next(1, File.ReadAllLines("Proxies.txt").Count())]);
             }
+        }
+
+        public async static Task<List<APIUser>> GetFriends(this VRCSharpSession session, bool MustBeOffline = false, int Index = 50, int Offset = 300)
+        {
+            HttpClientHandler handler = null;
+            HttpClient client = new HttpClient();
+
+            if (session.UseProxies)
+            {
+                //Load proxies from Proxies.txt
+                handler = new HttpClientHandler();
+                handler.Proxy = APIExtensions.GetRandomProxy();
+                client = new HttpClient(handler);
+            }
+
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", session.AuthToken);
+
+            var response = await client.GetAsync($"https://vrchat.com/api/1/auth/user/friends?offline={MustBeOffline}&n={Index}&offset={Offset}&apiKey={GlobalVars.ApiKey}");
+
+            return JsonConvert.DeserializeObject<List<APIUser>>(await response.Content.ReadAsStringAsync());
         }
     }
 }

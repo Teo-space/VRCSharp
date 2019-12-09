@@ -35,9 +35,17 @@ namespace VRCSharp
         #region Events
         public delegate void NotificationHandler(VRCSharpSession session, NotificationEventArgs args);
 
+        public delegate void CustomNotificationHandler(VRCSharpSession session, string message);
+
         public event NotificationHandler OnNotificationReceived;
 
         public event NotificationHandler OnFriendshipRequestReceived;
+
+        public event NotificationHandler OnInviteReceived;
+
+        public event NotificationHandler OnRequestInvite;
+
+        public event CustomNotificationHandler OnAttemptedLogin;
         #endregion
 
         public VRCSharpSession(string username, string password, bool useProxies = false)
@@ -55,7 +63,7 @@ namespace VRCSharp
             }).Start();
         }
 
-        public async Task Login()
+        public async Task<bool> Login()
         {
             AuthToken = "Basic " + GlobalVars.Base64Encode(_username + ":" + _password);
 
@@ -73,18 +81,22 @@ namespace VRCSharp
             client.DefaultRequestHeaders.Add("Authorization", AuthToken);
 
             var response = await client.GetAsync($"https://api.vrchat.cloud/api/1/auth/user?apiKey={GlobalVars.ApiKey}");
-
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 Authenticated = false;
                 Details = "Invalid Authorization.";
+                OnAttemptedLogin?.Invoke(this, Details);
             }
             else
             {
                 Authenticated = true;
                 Details = "Successful Login Attempt.";
                 Info = JsonConvert.DeserializeObject<AccountInfo>(await response.Content.ReadAsStringAsync());
+                OnAttemptedLogin?.Invoke(this, Details);
             }
+
+
+            return Authenticated;
         }
 
         public void Logout()
@@ -94,7 +106,7 @@ namespace VRCSharp
         }
 
         #region Event Handler
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (Authenticated)
             {
@@ -102,11 +114,11 @@ namespace VRCSharp
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", AuthToken);
 
-                var response = client.GetAsync($"https://vrchat.com/api/1/auth/user/notifications?apiKey={GlobalVars.ApiKey}");
+                var response = await client.GetAsync($"https://vrchat.com/api/1/auth/user/notifications?apiKey={GlobalVars.ApiKey}");
 
-                if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var resp = JsonConvert.DeserializeObject<List<NotificationResponse>>(response.Result.Content.ReadAsStringAsync().Result);
+                    var resp = JsonConvert.DeserializeObject<List<NotificationResponse>>(await response.Content.ReadAsStringAsync());
 
                     foreach (var res in resp)
                     {
@@ -114,15 +126,21 @@ namespace VRCSharp
 
                         var amount = Math.Round(result, 0);
 
-                        if (amount < 130)
+                        if (amount < 200)
                         {
                             switch(res.type.Convert())
                             {
                                 default:
-                                    OnNotificationReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                                    OnNotificationReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message, this.GetAPIUserByID(res.senderUserId).Result));
                                     break;
                                 case NotificationType.friendRequest:
-                                    OnFriendshipRequestReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message));
+                                    OnFriendshipRequestReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message, this.GetAPIUserByID(res.senderUserId).Result));
+                                    break;
+                                case NotificationType.invite:
+                                    OnInviteReceived?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message, this.GetAPIUserByID(res.senderUserId).Result));
+                                    break;
+                                case NotificationType.requestInvite:
+                                    OnRequestInvite?.Invoke(this, new NotificationEventArgs(res.type.Convert(), res.message, this.GetAPIUserByID(res.senderUserId).Result));
                                     break;
                                 
                             }
