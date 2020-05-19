@@ -18,7 +18,7 @@ Message Users <br />
 Events such as for onNotificationReceived, etc <br />
 
 # ROAD MAP (Planned Features)
-And more coming soon! Give me some suggestions! Thank you - Yaekith<br />
+Websocket Events<br />
 
 # Example Usage
 ```csharp
